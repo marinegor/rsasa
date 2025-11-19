@@ -17,9 +17,8 @@ fn main() {
     let atom_mapping = vec![0]; // Single group
     let atom_selection_mask = vec![1]; // Compute SASA for this atom
     let n_groups = 1;
-    let mut out = vec![0.0; n_frames * n_groups];
 
-    sasa(
+    let out = sasa(
         n_frames,
         n_atoms,
         &xyzlist,
@@ -28,8 +27,8 @@ fn main() {
         &atom_mapping,
         &atom_selection_mask,
         n_groups,
-        &mut out,
-    );
+    )
+    .unwrap();
 
     let expected_area = 4.0 * std::f32::consts::PI * atom_radii[0] * atom_radii[0];
     println!("  Calculated SASA: {:.2} Ų", out[0]);
@@ -51,9 +50,8 @@ fn main() {
     let atom_mapping = vec![0, 1]; // Each atom in its own group
     let atom_selection_mask = vec![1, 1];
     let n_groups = 2;
-    let mut out = vec![0.0; n_frames * n_groups];
 
-    sasa(
+    let out = sasa(
         n_frames,
         n_atoms,
         &xyzlist,
@@ -62,8 +60,8 @@ fn main() {
         &atom_mapping,
         &atom_selection_mask,
         n_groups,
-        &mut out,
-    );
+    )
+    .unwrap();
 
     let full_sphere = 4.0 * std::f32::consts::PI * atom_radii[0] * atom_radii[0];
     println!(
@@ -91,9 +89,8 @@ fn main() {
     let atom_mapping = vec![0, 0, 1]; // Atoms 1-2 in group 0, atom 3 in group 1
     let atom_selection_mask = vec![1, 1, 1];
     let n_groups = 2;
-    let mut out = vec![0.0; n_frames * n_groups];
 
-    sasa(
+    let out = sasa(
         n_frames,
         n_atoms,
         &xyzlist,
@@ -102,8 +99,8 @@ fn main() {
         &atom_mapping,
         &atom_selection_mask,
         n_groups,
-        &mut out,
-    );
+    )
+    .unwrap();
 
     println!("  Group 0 (atoms 1-2) SASA: {:.2} Ų", out[0]);
     println!("  Group 1 (atom 3) SASA: {:.2} Ų", out[1]);
@@ -118,9 +115,8 @@ fn main() {
     let atom_mapping = vec![0, 1, 2];
     let atom_selection_mask = vec![1, 0, 1]; // Only compute for atoms 1 and 3
     let n_groups = 3;
-    let mut out = vec![0.0; n_frames * n_groups];
 
-    sasa(
+    let out = sasa(
         n_frames,
         n_atoms,
         &xyzlist,
@@ -129,8 +125,8 @@ fn main() {
         &atom_mapping,
         &atom_selection_mask,
         n_groups,
-        &mut out,
-    );
+    )
+    .unwrap();
 
     println!("  Atom 1 SASA (computed): {:.2} Ų", out[0]);
     println!("  Atom 2 SASA (skipped): {:.2} Ų", out[1]);

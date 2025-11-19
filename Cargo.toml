@@ -12,5 +12,12 @@ categories = ["science"]
 [lib]
 name = "rsasa"
 path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = []
+python = ["pyo3", "numpy"]
 
 [dependencies]
+pyo3 = { version = "0.22", features = ["extension-module"], optional = true }
+numpy = { version = "0.22", optional = true }
