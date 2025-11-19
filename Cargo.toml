@@ -1,6 +1,16 @@
 [package]
 name = "rsasa"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+authors = []
+description = "A library for calculating Solvent Accessible Surface Area (SASA) of molecular structures"
+license = "MIT OR Apache-2.0"
+repository = ""
+keywords = ["sasa", "molecular", "chemistry", "surface-area"]
+categories = ["science"]
+
+[lib]
+name = "rsasa"
+path = "src/lib.rs"
 
 [dependencies]
